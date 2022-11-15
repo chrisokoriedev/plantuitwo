@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -35,7 +36,7 @@ class Homepage extends StatelessWidget {
             image: DecorationImage(
                 colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.3), BlendMode.darken),
-                image: const AssetImage('assets/bg2.jpg'),
+                image: const AssetImage('assets/bg.jpg'),
                 fit: BoxFit.cover)),
         child: Column(
           children: [Text('Green way is out way')],
