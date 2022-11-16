@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-const kPadding = EdgeInsets.symmetric(horizontal: 20, vertical: 20);
+const kPadding = EdgeInsets.symmetric(horizontal: 20, vertical: 25);
+const whiteColor = Colors.white;
+SizedBox sizedHeight(double height) {
+  return SizedBox(
+    height: height,
+  );
+}
+
+final mediaWith = Get.mediaQuery.size.width;
+final mediaHeight = Get.mediaQuery.size.height;
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -39,9 +49,92 @@ class Homepage extends StatelessWidget {
                 image: const AssetImage('assets/bg.jpg'),
                 fit: BoxFit.cover)),
         child: Column(
-          children: [Text('Green way is out way')],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Text(
+              'Green Way is \nOur Way',
+              style: TextStyle(
+                  height: 1.2,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                  color: whiteColor,
+                  letterSpacing: 1.5),
+            ),
+            sizedHeight(30),
+            const Text(
+              'To plant a garden to believe in\ntommorrow',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: whiteColor,
+                  letterSpacing: 1.3),
+            ),
+            sizedHeight(30),
+            GestureDetector(
+              onTap: () => Get.to(const DetailScreen()),
+              child: Center(
+                child: Container(
+                  width: mediaWidth * 0.6,
+                  height: 45,
+                  decoration: BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Center(
+                      child: Text(
+                    'Get started',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  )),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  const DetailScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SafeArea(
+      child: SizedBox(
+        height: mediaHeight,
+        child: Stack(
+          children: [
+            Container(
+              width: mediaWith,
+              height: mediaHeight * 0.5 + 40,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/bg2.jpg'), fit: BoxFit.cover)),
+            ),
+            Container(
+              padding: kPadding,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Icon(Icons.arrow_back),
+                  Icon(Icons.favorite_outline),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: mediaWith,
+                height: mediaHeight * 0.4 + 40,
+                decoration: BoxDecoration(
+                    color: whiteColor, borderRadius: BorderRadius.circular(50)),
+              ),
+            )
+          ],
+        ),
+      ),
+    ));
   }
 }
