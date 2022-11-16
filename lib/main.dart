@@ -7,6 +7,7 @@ void main() {
 
 const kPadding = EdgeInsets.symmetric(horizontal: 20, vertical: 25);
 const whiteColor = Colors.white;
+const kPrimary = Color(0xff214813);
 SizedBox sizedHeight(double height) {
   return SizedBox(
     height: height,
@@ -95,8 +96,15 @@ class Homepage extends StatelessWidget {
   }
 }
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +125,11 @@ class DetailScreen extends StatelessWidget {
               padding: kPadding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Icon(Icons.arrow_back),
-                  Icon(Icons.favorite_outline),
+                children: [
+                  GestureDetector(
+                      onTap: () => Get.back(),
+                      child: const Icon(Icons.arrow_back)),
+                  const Icon(Icons.favorite_outline),
                 ],
               ),
             ),
@@ -128,13 +138,89 @@ class DetailScreen extends StatelessWidget {
               child: Container(
                 width: mediaWith,
                 height: mediaHeight * 0.4 + 40,
+                padding: kPadding,
                 decoration: BoxDecoration(
                     color: whiteColor, borderRadius: BorderRadius.circular(50)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Fasciated Haworthia',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: kPrimary,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    sizedHeight(15),
+                    const Text(
+                      '\$23.4',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: kPrimary,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    sizedHeight(10),
+                    const Text(
+                      'Haworthia Fasciata is a succulent easy '
+                      'to care for that grows well indoors. Haworthia Fasciata plants are o'
+                      'ften confused with Haworthia Attenuate because they are very similar.',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    sizedHeight(30),
+                    Row(
+                      children: [
+                        buttonEvent(() {
+                          setState(() {
+                            quantity--;
+                          });
+                        }, '-', Colors.grey.withOpacity(0.6)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            quantity.toString(),
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        buttonEvent(() {
+                          setState(() {
+                            quantity++;
+                          });
+                        }, '+', kPrimary)
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],
         ),
       ),
     ));
+  }
+
+  buttonEvent(VoidCallback press, String symbol, Color color) {
+    return GestureDetector(
+      onTap: press,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration:
+            BoxDecoration(color: color, borderRadius: BorderRadius.circular(5)),
+        child: Center(
+          child: Text(
+            symbol,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: symbol == '+' ? whiteColor : Colors.black),
+          ),
+        ),
+      ),
+    );
   }
 }
