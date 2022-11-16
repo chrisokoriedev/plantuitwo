@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'detailpage.dart';
-import 'main.dart';
 import 'widgetandstyle.dart';
 
 class Homepage extends StatelessWidget {

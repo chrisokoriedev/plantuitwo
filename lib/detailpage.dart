@@ -13,6 +13,7 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   int quantity = 1;
   double price = 23;
+  double newPrice = 23;
   bool isPressed = false;
   bool isAdded = false;
   @override
@@ -68,7 +69,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: mediaWith * 0.5,
+                          width: mediaWith * 0.3,
                           height: 7,
                           decoration: BoxDecoration(
                               color: Colors.grey.withOpacity(0.4),
@@ -80,13 +81,13 @@ class _DetailScreenState extends State<DetailScreen> {
                     const Text(
                       'Fasciated Haworthia',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 22,
                           color: kPrimary,
                           fontWeight: FontWeight.w600),
                     ),
                     sizedHeight(15),
                     Text(
-                      '\$$price'.toString(),
+                      '\$$newPrice'.toString(),
                       style: const TextStyle(
                           fontSize: 18,
                           color: kPrimary,
@@ -114,9 +115,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               () {
                                 setState(() {
                                   if (quantity != 1) {
-                                    price = price / quantity;
-
                                     quantity--;
+                                    newPrice = newPrice - price;
                                   } else {
                                     return;
                                   }
@@ -140,7 +140,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               setState(() {
                                 if (quantity != 10) {
                                   quantity++;
-                                  price = price * quantity;
+                                  newPrice = price * quantity;
                                 } else {
                                   return;
                                 }
@@ -158,14 +158,24 @@ class _DetailScreenState extends State<DetailScreen> {
                                         border: Border.all(
                                             color: kPrimary, width: 2),
                                         borderRadius: BorderRadius.circular(5)),
-                                    child: const Center(
-                                        child: Text(
-                                      'Added to cart',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: kPrimary),
-                                    ))),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.local_grocery_store_rounded,
+                                          color: kPrimary,
+                                        ),
+                                        sizedWidth(5),
+                                        const Text(
+                                          'Added to cart',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: kPrimary),
+                                        ),
+                                      ],
+                                    )),
                               )
                             : Expanded(
                                 child: GestureDetector(
