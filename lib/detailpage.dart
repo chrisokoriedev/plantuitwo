@@ -14,7 +14,7 @@ class _DetailScreenState extends State<DetailScreen> {
   int quantity = 1;
   double price = 23;
   bool isPressed = false;
-
+  bool isAdded = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,13 +57,26 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Container(
                 width: mediaWith,
                 height: mediaHeight * 0.4 + 40,
-                padding: kPadding,
+                padding: kPadding.copyWith(top: 10),
                 decoration: BoxDecoration(
                     color: whiteColor, borderRadius: BorderRadius.circular(50)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: mediaWith * 0.5,
+                          height: 7,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(10)),
+                        )
+                      ],
+                    ),
+                    sizedHeight(20),
                     const Text(
                       'Fasciated Haworthia',
                       style: TextStyle(
@@ -79,7 +92,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: kPrimary,
                           fontWeight: FontWeight.w600),
                     ),
-                    sizedHeight(10),
+                    sizedHeight(20),
                     const Text(
                       'Haworthia Fasciata is a succulent easy '
                       'to care for that grows well indoors. Haworthia Fasciata plants are o'
@@ -88,7 +101,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       style: TextStyle(
                           letterSpacing: 1.1,
                           fontWeight: FontWeight.w500,
-                          fontSize: 17,
+                          fontSize: 15,
                           color: kPrimary),
                     ),
                     sizedHeight(30),
@@ -96,6 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       children: [
                         Row(
                           children: [
+                            //minus button
                             buttonEvent(
                               () {
                                 setState(() {
@@ -111,6 +125,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               '-',
                               Colors.grey.withOpacity(0.6),
                             ),
+                            //quantity
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20),
@@ -120,6 +135,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     fontSize: 20, fontWeight: FontWeight.w600),
                               ),
                             ),
+                            //add button
                             buttonEvent(() {
                               setState(() {
                                 if (quantity != 10) {
@@ -133,21 +149,47 @@ class _DetailScreenState extends State<DetailScreen> {
                           ],
                         ),
                         sizedWidth(20),
-                        Expanded(
-                          child: Container(
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: kPrimary,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: const Center(
-                                  child: Text(
-                                'Add to Cart',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: whiteColor),
-                              ))),
-                        )
+                        isAdded
+                            ? Expanded(
+                                child: Container(
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                        color: whiteColor,
+                                        border: Border.all(
+                                            color: kPrimary, width: 2),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: const Center(
+                                        child: Text(
+                                      'Added to cart',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: kPrimary),
+                                    ))),
+                              )
+                            : Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      isAdded = !isAdded;
+                                    });
+                                  },
+                                  child: Container(
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                          color: kPrimary,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
+                                          child: Text(
+                                        'Add to Cart',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: whiteColor),
+                                      ))),
+                                ),
+                              )
                       ],
                     )
                   ],
@@ -165,7 +207,7 @@ class _DetailScreenState extends State<DetailScreen> {
       onTap: press,
       child: Container(
         width: 40,
-        height: 40,
+        height: 45,
         decoration:
             BoxDecoration(color: color, borderRadius: BorderRadius.circular(5)),
         child: Center(
