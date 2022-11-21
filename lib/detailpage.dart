@@ -18,12 +18,15 @@ class _DetailScreenState extends State<DetailScreen> {
   bool isAdded = false;
   @override
   Widget build(BuildContext context) {
+    //screen
     return Scaffold(
         body: SafeArea(
       child: SizedBox(
         height: mediaHeight,
+        //stack 
         child: Stack(
           children: [
+            //image background
             Container(
               width: mediaWith,
               height: mediaHeight * 0.5 + 40,
@@ -31,6 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   image: DecorationImage(
                       image: AssetImage('assets/bg2.jpg'), fit: BoxFit.cover)),
             ),
+            // top icon container
             Container(
               padding: kPadding,
               child: Row(
@@ -53,7 +57,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            Align(
+           //bottom sheet
+            Align(          
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: mediaWith,
@@ -206,6 +211,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             )
+
           ],
         ),
       ),
