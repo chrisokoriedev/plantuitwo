@@ -21,9 +21,7 @@ class _DetailScreenState extends State<DetailScreen> {
     //screen
     return Scaffold(
         body: SafeArea(
-      child: SizedBox(
-        height: mediaHeight,
-        //stack 
+      child: Expanded(
         child: Stack(
           children: [
             //image background
@@ -57,12 +55,12 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-           //bottom sheet
-            Align(          
+            //bottom sheet
+            Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: mediaWith,
-                height: mediaHeight * 0.4 + 40,
+                height: mediaHeight * 0.4 + 40, //take 40 & + 0.4
                 padding: kPadding.copyWith(top: 10),
                 decoration: BoxDecoration(
                     color: whiteColor, borderRadius: BorderRadius.circular(50)),
@@ -132,8 +130,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                             //quantity
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: Text(
                                 quantity.toString(),
                                 style: const TextStyle(
@@ -160,12 +157,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                     height: 45,
                                     decoration: BoxDecoration(
                                         color: whiteColor,
-                                        border: Border.all(
-                                            color: kPrimary, width: 2),
+                                        border:
+                                            Border.all(color: kPrimary, width: 2),
                                         borderRadius: BorderRadius.circular(5)),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         const Icon(
                                           Icons.local_grocery_store_rounded,
@@ -193,8 +189,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       height: 45,
                                       decoration: BoxDecoration(
                                           color: kPrimary,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                          borderRadius: BorderRadius.circular(5)),
                                       child: const Center(
                                           child: Text(
                                         'Add to Cart',
@@ -211,7 +206,6 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             )
-
           ],
         ),
       ),
